@@ -1,0 +1,13 @@
+{% extends "structure/base.html" %}
+
+{% block content %}
+  <h2>Deletar Empresa</h2>
+  <p>Tem certeza que deseja deletar a empresa? "{{ topic.top_name }}"?</p>
+  
+  <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="Sim, deletar este tópico">
+  </form>
+
+  <a href="{% url 'topics' %}">Não, voltar para a lista de empresas.</a>
+{% endblock content %}

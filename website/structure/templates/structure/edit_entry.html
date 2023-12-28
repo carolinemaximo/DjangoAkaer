@@ -1,0 +1,44 @@
+{% extends "structure/base.html"%}
+{% load bootstrap5 %}
+
+{% block header %}
+    <h2 class="p-3"><a href="{% url 'topic' topic.id %}">{{ topic }}</a></h2>
+{% endblock header %}
+
+{% block content %}
+
+<h4> Editar projeto:</h4>
+
+<form action="{% url 'edit_entry' entry.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Salvar alterações</button>
+</form>
+<!-- adicionar um botão de deletar do lado de "salvar anotações"-->
+<form action="{% url 'delete_entry' entry.id %}" method='post'>
+    {% csrf_token %}
+    <button name="submit">Deletar projeto</button>
+</form>
+
+<form method="post" action="{% url 'add_collaborator' entry.id %}">
+    {% csrf_token %}
+    <select name="user_id">
+        {% for user in users %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Adicionar Colaborador">
+</form>
+
+<form method="post" action="{% url 'remove_collaborator' entry.id %}">
+    {% csrf_token %}
+    <select name="user_id">
+        {% for user in entry.collaborators.all %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Remover Colaborador">
+</form>
+
+
+{% endblock content %}

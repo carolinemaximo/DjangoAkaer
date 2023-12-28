@@ -1,0 +1,65 @@
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+
+   <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name ="desciption" content="Aplicação para anotações."/>
+        <meta name="keywords" content="Anotaçoes, anotação"/>
+        <meta name="author" content="Caroline Maximo"/>
+
+        <title>Projeto Estágio Akaer</title>
+
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        
+   </head>
+
+   <body>
+      <nav class="navbar padding-left navbar-expand-lg navbar-light bg-light">
+         <div class="container">
+         <a class="navbar-brand" href="{% url 'index' %}">Projeto Estágio Akaer</a>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               
+               </li>
+               <li class="nav-item">
+               <a class="nav-link active" href="{% url 'topics' %}">Empresas</a>
+               </li>
+               
+               {% if user.is_authenticated %}
+               <li class="nav-item">
+                  <li class="nav-link active"><a>Olá, {{ user.username }}</a></li>
+                  <a class="nav-link active" href="{% url 'logout' %}">Sair</a>
+               {% else %}
+               <a class="nav-link active" href="{% url 'login' %}">Entrar</a>
+               <a class="nav-link active" href="{% url 'register' %}">Cadastrar</a>
+               {% endif %}
+            </ul>
+            
+         </div>
+         
+         </div>
+      </nav>
+      <div class="container">
+            <div clas="page-header">
+               {% block header %}{% endblock header %}
+            </div>
+            <div>
+               {% block content %}{% endblock content %}
+            </div>
+      </div>
+   </body>
+   
+
+
+
+</html>

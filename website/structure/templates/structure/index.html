@@ -1,0 +1,26 @@
+{% extends "structure/base.html" %}
+
+{% block header %}
+
+    {% if user.is_authenticated %}
+        <h2 class="p-3">Empresas Vinculadas</h2>
+    {% else %}
+        <h1 class="p-3">Seja Bem Vindo!</h1>
+    {% endif %}
+{% endblock header %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <ul class="list-group">
+            {% for topic in topics %}
+                <li class="list-group-item"><a class="navbar-brand" href="{% url 'topic' topic.id %}">{{ topic.top_name }}</a></li>
+            {% empty %}
+                <p>Não há empresas vinculadas.</p>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="fs-5">
+        <p>Para utilizar o gerenciamento de empresas e projetos, por favor <a href="{% url 'register' %}">Faça seu Cadastro</a> ou <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    {% endif %}
+{% endblock content %}

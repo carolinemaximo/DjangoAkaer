@@ -1,0 +1,41 @@
+{% extends "structure/base.html" %}
+{% load bootstrap5 %}
+
+{% block header %}
+    <h2 class="p-3 link-primary">{{ topic }}</h2>
+{% endblock header %}
+
+{% block content %}
+    
+    
+    <h3 class="p-2">Projetos:</h3>
+
+    <ol class="list-group">
+        
+        {% comment %} {% for entry in topic.entries %}
+            <a href="{% url 'view_entry' entry.id %}">{{ entry.title }}</a>
+        {% endfor %} {% endcomment %}
+
+        {% for entry in entries %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">       
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold"><a href="{% url 'view_entry' entry.id %}">{{ entry.title }}</a>
+                    </div>
+                    <p>{{ entry.text|linebreaks }}</p>
+                    {% if request.user == entry.creator %}
+                    <a href="{% url 'edit_entry' entry.id %}">Editar projeto</a>
+                    {% endif %}
+                </div>
+            </li>
+                        
+            
+        {% empty %}
+            <li>Não há projetos vínculados ao usuário nesta empresa.</li>
+        {% endfor %}
+        
+    </ol>
+    <p>
+        <a href="{% url 'new_entry' topic.id %}" class="p-2">Adicionar novo projeto</a>
+    </p>
+
+{% endblock content %}

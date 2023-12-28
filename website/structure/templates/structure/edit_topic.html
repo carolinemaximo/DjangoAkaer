@@ -1,0 +1,12 @@
+{% extends "structure/base.html" %}
+
+
+{% block content %}
+  <h2>Editar empresa</h2>
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Salvar Alterações</button>
+  </form>
+  <a href="{% url 'topic' topic.id %}">Cancelar</a>
+{% endblock content%}

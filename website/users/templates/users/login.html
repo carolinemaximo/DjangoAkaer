@@ -1,0 +1,14 @@
+{% extends "structure/base.html" %}
+{% load bootstrap5%}
+
+{% block content %}
+
+    <form action= "{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+       
+        <button name="submit">Entrar</button>
+        <input type="hidden" name="next" value="{% url 'index' %}" />
+    </form>
+
+{% endblock content %}

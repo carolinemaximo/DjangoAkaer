@@ -1,0 +1,20 @@
+{% extends "structure/base.html" %}
+{% load bootstrap5 %}
+
+{% block header %}
+    <h2 class="p-3 link-primary">{{ topic }}</h2>
+{% endblock header %}
+
+{% block content %}
+   
+<p><a href="{% url 'topic' topic.id %}">{{ topic }}</a></p>
+
+<p>Adicione novo projeto:</p>
+
+<form action="{% url 'new_entry' topic.id %}" method="POST">  
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Adicionar</button>
+</form>
+
+{% endblock content %}
